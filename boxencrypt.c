@@ -4,22 +4,18 @@
 
 #define MAXROWS 9
 #define MAXCOLS 6
-
 int *getRowCol(char c, const char key[MAXROWS][MAXCOLS]){
   static int rowCol[2];
   for(int i = 0; i < MAXROWS; i++){
     for(int j= 0; j < MAXCOLS; j++){
       if(c == key[i][j]){
+        rowCol[0] = i;
         rowCol[1] = j;
-        break;
+        return rowCol;
       }
     }
-    if(c == key[i][rowCol[1]]){
-      rowCol[0] = i;
-      break;
-    }
   }
-  return rowCol;
+  return NULL;
 }
 
 void encryptPair(char first, char second, char *rfirst, char *rsecond, const char key[MAXROWS][MAXCOLS]){
