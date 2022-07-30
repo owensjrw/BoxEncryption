@@ -4,6 +4,7 @@
 
 #define MAXROWS 9
 #define MAXCOLS 6
+
 int *getRowCol(char c, const char key[MAXROWS][MAXCOLS]){
   static int rowCol[2];
   for(int i = 0; i < MAXROWS; i++){
@@ -18,7 +19,8 @@ int *getRowCol(char c, const char key[MAXROWS][MAXCOLS]){
   return NULL;
 }
 
-void encryptPair(char first, char second, char *rfirst, char *rsecond, const char key[MAXROWS][MAXCOLS]){
+void encryptPair(char first, char second, char *rfirst, char *rsecond,
+                 const char key[MAXROWS][MAXCOLS]){
   int rowColFirst[2];
   int rowColSecond[2];
   int *rowCol;
@@ -55,7 +57,8 @@ int main(void){
    encryptMessage = malloc(sizeof *encryptMessage * (toEncryptLength + 1));
 
    for(int i = 0; i < (toEncryptLength - (toEncryptLength % 2)); i += 2){
-     encryptPair(toEncrypt[i], toEncrypt[i + 1], &encryptMessage[i], &encryptMessage[i + 1], key);
+     encryptPair(toEncrypt[i], toEncrypt[i + 1], &encryptMessage[i],
+                 &encryptMessage[i + 1], key);
    }
 
    if(toEncryptLength % 2 == 0){
