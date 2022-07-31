@@ -10,7 +10,7 @@ void encrypt(char key[][8], char word[], char arr2[]){
 
   while(idx < (wordLen - 1)){
     for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 9; j++){
+      for(int j = 0; j < 8; j++){
         if(word[idx] == key[i][j]){
           row1 = i;
           col1 = j;
