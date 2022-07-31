@@ -25,13 +25,26 @@ void encryptPair(char first, char second, char *rfirst, char *rsecond,
   int rowColSecond[2];
   int *rowCol;
   rowCol = getRowCol(first, key);
-  rowColFirst[0] = rowCol[0];
-  rowColFirst[1] = rowCol[1];
+  if(rowCol == NULL){
+    rowColFirst[0] = MAXROWS;
+    rowColFirst[1] = MAXCOLS;
+  } else {
+    rowColFirst[0] = rowCol[0];
+    rowColFirst[1] = rowCol[1];
+  }
   rowCol = getRowCol(second, key);
-  rowColSecond[0] = rowCol[0];
-  rowColSecond[1] = rowCol[1];
+  if(rowCol == NULL){
+    rowColSecond[0] = MAXROWS;
+    rowColSecond[1] = MAXCOLS;
+  } else {
+    rowColSecond[0] = rowCol[0];
+    rowColSecond[1] = rowCol[1];
+  }
 
-  if((rowColFirst[0] == rowColSecond[0]) || (rowColFirst[1] == rowColSecond[1])){
+  if( (rowColFirst[0] == rowColSecond[0])                              ||
+      (rowColFirst[1] == rowColSecond[1])                              ||
+      ((rowColFirst[0] == MAXROWS) && (rowColFirst[1] == MAXCOLS))     ||
+      ((rowColSecond[0] == MAXROWS) && (rowColSecond[1] == MAXCOLS))   ){
     *rfirst = second;
     *rsecond = first;
   } else {
@@ -51,12 +64,12 @@ int main(void){
                                        {'f', 'v', 't','g', 'b', 'y'},
                                        {'h', 'n', 'u','j', 'm', 'i'},
                                        {'k', 'o', 'l','p', '1', ' '} };
-   const char *toEncrypt = "A very Long STring To Encrypt with a 1";
+   const char *toEncrypt = "A very*Long STring To Encrypt with a 1";
    char *encryptMessage;
    int toEncryptLength = strlen(toEncrypt);
    encryptMessage = malloc(toEncryptLength + 1);
 
-   for(int i = 0; i < (toEncryptLength - (toEncryptLength % 2)); i += 2){
+   for(int i = 0; i < (toEncryptLength - 1); i += 2){
      encryptPair(toEncrypt[i], toEncrypt[i + 1], &encryptMessage[i],
                  &encryptMessage[i + 1], key);
    }
