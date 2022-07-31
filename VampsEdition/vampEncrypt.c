@@ -34,6 +34,7 @@ void encrypt(char key[][8], char word[], char arr2[]){
          arr2[idx + 1] = key[row2][col1];
     }
     idx += 2;
+    row1 = col1 = row2 = col2 = 8;
   }
   arr2[wordLen] = '\0';
 }
