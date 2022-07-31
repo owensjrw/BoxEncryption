@@ -6,49 +6,43 @@
 #define MAXROWS 8
 #define MAXCOLS 8
 
-int found(char m[][8], char val)
-{
-    for (int r = 0; r < 8; r++)
-    {
-        for (int c = 0; c < 8; c++)
-        {
-            if (m[r][c] == val)
-                return 1;
-        }
+int found(char m[][8], char val){
+  for (int r = 0; r < 8; r++) {
+    for (int c = 0; c < 8; c++) {
+      if (m[r][c] == val)
+      return 1;
     }
-    return 0;
+  }
+  return 0;
 }
 
-void generate_key(char key[][8])
-{
-    int i;
-    char temp[64] = { ' ' };
-    int k = 0;
-    temp[k++] = ' ';
-    temp[k++] = '.';
+void generate_key(char key[][8]){
+  int i, k = 0;
+  char temp[64];
+  temp[k++] = ' ';
+  temp[k++] = '.';
 
-    for (i = 0; i < 10; i++, k++)
-        temp[k] = '0' + i;
+  for (i = 0; i < 10; i++, k++) {
+    temp[k] = '0' + i;
+  }
 
-    for (i = 0; i < 26; i++, k++)
-        temp[k] = 'A' + i;
+  for (i = 0; i < 26; i++, k++) {
+    temp[k] = 'A' + i;
+  }
 
-    for (i = 0; i < 26; i++, k++)
-        temp[k] = 'a' + i;
+  for (i = 0; i < 26; i++, k++) {
+    temp[k] = 'a' + i;
+  }
 
-    for (int r = 0; r < 8; r++)
-    {
-        for (int c = 0; c < 8; c++)
-        {
-
-            i = rand() % 64;
-            while (found(key, temp[i]) == 1)
-            {
-                i = rand() % 64;
-            }
-            key[r][c] = temp[i];
-        }
+  for (int r = 0; r < 8; r++) {
+    for (int c = 0; c < 8; c++) {
+      i = rand() % 64;
+      while (found(key, temp[i]) == 1) {
+        i = rand() % 64;
+      }
+      key[r][c] = temp[i];
     }
+  }
 }
 
 //Function to get row and column from key
@@ -117,7 +111,7 @@ int main(void){
    */
    char key[8][8], *toEncrypt, *encryptMessage;
    size_t charcount, getline_n = 0;
-   
+
    generate_key(key);
    //Get and test input
    puts("Enter a string to be encyrpted:");
@@ -153,6 +147,7 @@ int main(void){
 
    //Print original text and encyrpted text.
    printf("Original Text: %s\n", toEncrypt);
+   puts("------------------");
    puts("Using key:");
    for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
@@ -160,6 +155,7 @@ int main(void){
     }
    puts("");
    }
+   puts("-----------------");
    printf("Cypher Text: %s\n", encryptMessage);
 
    //Clean heap
