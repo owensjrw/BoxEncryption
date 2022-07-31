@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -64,9 +65,19 @@ int main(void){
                                        {'f', 'v', 't','g', 'b', 'y'},
                                        {'h', 'n', 'u','j', 'm', 'i'},
                                        {'k', 'o', 'l','p', '1', ' '} };
-   const char *toEncrypt = "A very*Long STring To Encrypt with a 1";
+   char *toEncrypt;
+   size_t getline_n = 0;
+   size_t charcount;
+   puts("Enter a string to be encyrpted:");
+   charcount = getline(&toEncrypt, &getline_n, stdin);
+   if(charcount == -1){
+     perror("Error: Unalbe to get input.");
+     EXIT_FAILURE;
+   }
    char *encryptMessage;
    int toEncryptLength = strlen(toEncrypt);
+   toEncrypt[toEncryptLength - 1] = '\0';
+   toEncryptLength = strlen(toEncrypt);
    encryptMessage = malloc(toEncryptLength + 1);
 
    for(int i = 0; i < (toEncryptLength - 1); i += 2){
@@ -84,6 +95,7 @@ int main(void){
    printf("Original Text: %s\n", toEncrypt);
    printf("Cypher Text: %s\n", encryptMessage);
 
+   free(toEncrypt);
    free(encryptMessage);
    return EXIT_SUCCESS;
 }
