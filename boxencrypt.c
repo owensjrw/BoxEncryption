@@ -72,7 +72,7 @@ int main(void){
    charcount = getline(&toEncrypt, &getline_n, stdin);
    if(charcount == -1){
      perror("Error: Unalbe to get input.");
-     EXIT_FAILURE;
+     exit(EXIT_FAILURE);
    }
    char *encryptMessage;
    int toEncryptLength = strlen(toEncrypt);
