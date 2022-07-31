@@ -6,6 +6,51 @@
 #define MAXROWS 8
 #define MAXCOLS 8
 
+int found(char m[][8], char val)
+{
+    for (int r = 0; r < 8; r++)
+    {
+        for (int c = 0; c < 8; c++)
+        {
+            if (m[r][c] == val)
+                return 1;
+        }
+    }
+    return 0;
+}
+
+void generate_key(char key[][8])
+{
+    int i;
+    char temp[64] = { ' ' };
+    int k = 0;
+    temp[k++] = ' ';
+    temp[k++] = '.';
+
+    for (i = 0; i < 10; i++, k++)
+        temp[k] = '0' + i;
+
+    for (i = 0; i < 26; i++, k++)
+        temp[k] = 'A' + i;
+
+    for (i = 0; i < 26; i++, k++)
+        temp[k] = 'a' + i;
+
+    for (int r = 0; r < 8; r++)
+    {
+        for (int c = 0; c < 8; c++)
+        {
+
+            i = rand() % 64;
+            while (found(key, temp[i]) == 1)
+            {
+                i = rand() % 64;
+            }
+            key[r][c] = temp[i];
+        }
+    }
+}
+
 //Function to get row and column from key
 int *getRowCol(char c, const char key[MAXROWS][MAXCOLS]){
   static int rowCol[2];
@@ -61,7 +106,7 @@ void encryptPair(char first, char second, char *rfirst, char *rsecond,
 
 int main(void){
   //Define variables
-  const char key[MAXROWS][MAXCOLS] = { {'b', '4', 'd', 'n', 'F', 'z', '8', 'g'},
+  /*const char key[MAXROWS][MAXCOLS] = { {'b', '4', 'd', 'n', 'F', 'z', '8', 'g'},
                                        {'B', 'u', 'f', 'm', 'v', 'X', 'w', '0'},
                                        {'I', 's', 'P', 'c', 'q', 'O', 'i', 'T'},
                                        {'7', 'a', 'r', 'l', 'M', 'Z', 'R', '3'},
@@ -69,9 +114,11 @@ int main(void){
                                        {'5', 'k', 'y', 'e', 'K', 'D' ,'j', '1'},
                                        {'p', 't', 'N', 'J', ' ', '9', 'E', '6'},
                                        {'Y', 'W', 'H', 'U', '2', 'A', 'h', 'G'} };
-   char *toEncrypt, *encryptMessage;
+   */
+   char key[8][8], *toEncrypt, *encryptMessage;
    size_t charcount, getline_n = 0;
-
+   
+   generate_key(key);
    //Get and test input
    puts("Enter a string to be encyrpted:");
    charcount = getline(&toEncrypt, &getline_n, stdin);
@@ -106,6 +153,13 @@ int main(void){
 
    //Print original text and encyrpted text.
    printf("Original Text: %s\n", toEncrypt);
+   puts("Using key:");
+   for(int i = 0; i < 8; i++){
+    for(int j = 0; j < 8; j++){
+      printf("%c ", key[i][j]);
+    }
+   puts("");
+   }
    printf("Cypher Text: %s\n", encryptMessage);
 
    //Clean heap
