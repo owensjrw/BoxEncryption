@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXROWS 9
-#define MAXCOLS 6
+#define MAXROWS 8
+#define MAXCOLS 8
 
 //Function to get row and column from key
 int *getRowCol(char c, const char key[MAXROWS][MAXCOLS]){
@@ -61,15 +61,14 @@ void encryptPair(char first, char second, char *rfirst, char *rsecond,
 
 int main(void){
   //Define variables
-  const char key[MAXROWS][MAXCOLS] = { {'Q', 'A', 'Z','W', 'S', 'X'},
-                                       {'E', 'D', 'C','R', 'F', 'V'},
-                                       {'T', 'G', 'B','Y', 'H', 'N'},
-                                       {'U', 'J', 'M','I', 'K', 'O'},
-                                       {'L', 'P', 'q','a', 'z', 'w'},
-                                       {'s', 'x', 'e','d', 'c', 'r'},
-                                       {'f', 'v', 't','g', 'b', 'y'},
-                                       {'h', 'n', 'u','j', 'm', 'i'},
-                                       {'k', 'o', 'l','p', '1', ' '} };
+  const char key[MAXROWS][MAXCOLS] = { {'b', '4', 'd', 'n', 'F', 'z', '8', 'g'},
+                                       {'B', 'u', 'f', 'm', 'v', 'X', 'w', '0'},
+                                       {'I', 's', 'P', 'c', 'q', 'O', 'i', 'T'},
+                                       {'7', 'a', 'r', 'l', 'M', 'Z', 'R', '3'},
+                                       {'L', 'S', 'o', 'C', '.', 'V', 'x', 'Q'},
+                                       {'5', 'k', 'y', 'e', 'K', 'D' ,'j', '1'},
+                                       {'p', 't', 'N', 'J', ' ', '9', 'E', '6'},
+                                       {'Y', 'W', 'H', 'U', '2', 'A', 'h', 'G'} };
    char *toEncrypt, *encryptMessage;
    size_t charcount, getline_n = 0;
 
