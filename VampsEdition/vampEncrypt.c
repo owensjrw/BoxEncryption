@@ -28,7 +28,7 @@ void encrypt(char key[][8], char word[], char arr2[]){
        row1 == row2 ||
        col1 == col2 ){
          arr2[idx] = word[idx + 1];
-         arr2[idx] = word[idx];
+         arr2[idx + 1] = word[idx];
     } else {
          arr2[idx]     = key[row1][col2];
          arr2[idx + 1] = key[row2][col1];
