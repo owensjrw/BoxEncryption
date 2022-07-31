@@ -54,7 +54,7 @@ int main(void){
    const char *toEncrypt = "A very Long STring To Encrypt with a 1";
    char *encryptMessage;
    int toEncryptLength = strlen(toEncrypt);
-   encryptMessage = malloc(sizeof *encryptMessage * (toEncryptLength + 1));
+   encryptMessage = malloc(toEncryptLength + 1);
 
    for(int i = 0; i < (toEncryptLength - (toEncryptLength % 2)); i += 2){
      encryptPair(toEncrypt[i], toEncrypt[i + 1], &encryptMessage[i],
