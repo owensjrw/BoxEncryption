@@ -35,6 +35,7 @@ void encrypt(char key[][8], char word[], char arr2[]){
     }
     idx += 2;
   }
+  arr2[wordLen] = '\0';
 }
 
 int found(char m[][8], char val){
